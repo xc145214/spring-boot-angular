@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>index</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/fileinput.css" rel="stylesheet">
+    <!-- JQuery import -->
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/fileinput.js"></script>
+    <script src="js/fileinput_locale_zh.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Spring boot</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="hello.html">首页</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <h2 class="page-header"> 上传文件</h2>
+
+
+        <form enctype="multipart/form-data">
+            <input id="input-1" type="file" class="file" multiple>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    $("#input-1").fileinput({
+        language: 'zh',
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'txt'],
+        uploadUrl: "/uploadFile",
+        uploadAsync: false,
+        type:"POST",
+        maxFileCount: 5
+    });
+
+
+</script>
+</body>
+</html>

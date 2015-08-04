@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>index</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/fileinput.css" rel="stylesheet">
+    <!-- JQuery import -->
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/fileinput.js"></script>
+    <script src="js/fileinput_locale_zh.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Spring boot</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">首页</a></li>
+                <li><a href="bootstrap-file-upload.html">bootstrap file upload</a></li>
+                <li><a href="normal.html">普通上传</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <h2 class="page-header"> 上传文件</h2>
+
+        <form id="upload-file-form">
+            <label for="upload-file-form">upload your file:</label>
+            <input id="upload-file-input" type="file" name="uploadfile" accept="*">
+            <br/>
+            <span id="upload-file-message"></span>
+        </form>
+
+
+    </div>
+
+</div>
+
+<script>
+    // bind the on-change event for the input element (triggered when a file
+    // is chosen)
+    $(document).ready(function() {
+        $("#upload-file-input").on("change", uploadFile);
+    });
+    /**
+     * Upload the file sending it via Ajax at the Spring Boot server.
+     */
+    function uploadFile() {
+        $.ajax({
+            url: "/uploadFile",
+            type: "POST",
+            data: new FormData($("#upload-file-form")[0]),
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function () {
+                // Handle upload success
+                $("#upload-file-message").text("File succesfully uploaded");
+            },
+            error: function () {
+                // Handle upload error
+                $("#upload-file-message").text(
+                        "File not uploaded (perhaps it's too much big)");
+            }
+        });
+    } // function uploadFile
+
+
+</script>
+</body>
+</html>
